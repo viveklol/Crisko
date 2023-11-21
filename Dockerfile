@@ -7,8 +7,14 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY . /app
 
+# Print the contents of requirements.txt for debugging
+RUN cat requirements.txt
+
 # Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt
+
+# Print the installed packages for debugging
+RUN pip freeze
 
 # Make port 8000 available to the world outside this container
 EXPOSE 8000
