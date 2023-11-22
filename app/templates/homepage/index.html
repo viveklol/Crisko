@@ -1,4 +1,242 @@
 {% extends "base/base.html"%}
+{%block contentstyle%}
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap");
+.line, .carousel li img, .carousel li, .carousel {
+  width: 100%;
+}
+
+.flex, .carousel-wrapper, .center, .carousel ul {
+  display: flex;
+}
+
+.center, .carousel ul {
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-wrapper {
+  position: relative;
+  max-width: 100%;
+  margin: 0px;
+}
+.carousel-wrapper input {
+  display: none;
+}
+
+.carousel {
+  overflow: hidden;
+  border-radius: 10px;
+}
+.carousel ul {
+  position: relative;
+  list-style: none;
+  overflow: hidden;
+  margin: 0px;
+  padding: 0;
+  height: 100%;
+  width: 300%;
+  transition: left 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+}
+.carousel li img {
+  border-radius: 15px;
+}
+
+.nav-dot {
+  position: absolute;
+  cursor: pointer;
+  margin-left: -7.5px;
+  bottom: -22.5px;
+  width: 15px;
+  height: 15px;
+  opacity: 0.5;
+  background-color: black;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+.nav-dot:hover {
+  opacity: 0.8;
+  transform: scale(1.2);
+}
+.nav-dot:active {
+  transform: scale(0.9);
+}
+
+.nav-dot[for=slide1] {
+  left: 45%;
+}
+
+#slide1:checked ~ .carousel ul {
+  left: 0%;
+}
+#slide1:checked ~ .nav-dot[for=slide1] {
+  opacity: 1;
+}
+
+.nav-dot[for=slide2] {
+  left: 50%;
+}
+
+#slide2:checked ~ .carousel ul {
+  left: -100%;
+}
+#slide2:checked ~ .nav-dot[for=slide2] {
+  opacity: 1;
+}
+
+.nav-dot[for=slide3] {
+  left: 55%;
+}
+
+#slide3:checked ~ .carousel ul {
+  left: -200%;
+}
+#slide3:checked ~ .nav-dot[for=slide3] {
+  opacity: 1;
+}
+
+.right-arrow, .left-arrow {
+  display: none;
+  position: absolute;
+  cursor: pointer;
+  font-weight: bolder;
+  text-shadow: 0 0 7.5px rgba(0, 0, 0, 0.7);
+  top: 50%;
+  z-index: 1;
+  opacity: 0.7;
+  margin-top: -25px;
+  height: 50px;
+  font-size: 50px;
+  transition: 0.2s;
+}
+.right-arrow:hover, .left-arrow:hover {
+  opacity: 1;
+  transform: scale(1.2);
+}
+.right-arrow:active, .left-arrow:active {
+  transform: scale(0.9);
+}
+
+.left-arrow {
+  left: 15px;
+}
+
+.right-arrow {
+  right: 15px;
+}
+
+#slide1:checked ~ .left-arrow[for=slide3], #slide1:checked ~ .right-arrow[for=slide2] {
+  display: block;
+}
+
+#slide2:checked ~ .left-arrow[for=slide1], #slide2:checked ~ .right-arrow[for=slide3] {
+  display: block;
+}
+
+#slide3:checked ~ .left-arrow[for=slide2], #slide3:checked ~ .right-arrow[for=slide1] {
+  display: block;
+}
+
+.signature {
+  margin-top: 100px;
+  bottom: 0;
+  font-family: "Quicksand";
+  color: #9696aa;
+  text-shadow: 0 2.5px rgba(0, 0, 0, 0.25);
+}
+.signature .name {
+  color: white;
+}
+.signature .dot {
+  margin: 0 5px;
+}
+.cont {
+
+}
+.container_p {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      height: 30vh;
+      width: 30%;
+      background-color: white;
+      border: 1px solid #ccc;
+      margin: 10px;
+      flex-direction: row;
+      border-radius: 8px;
+      color: black;
+      text-align: center;
+      box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+      font-family: 'cursive-font', cursive;
+    }
+
+    @media (max-width: 600px) {
+      .container_p {
+        flex-direction: column;
+        width: 90%;
+      }
+    }
+
+</style>
+{%endblock contentstyle%}
 {%block content%}
-<h1>Hello Crisko's</h1>
+{% load static %}
+<div class="center1">
+    <div class="carousel-wrapper">
+      <!-- abstract radio buttons for slides -->
+      <input id="slide1" type="radio" name="controls" checked="checked" />
+      <input id="slide2" type="radio" name="controls" />
+      <input id="slide3" type="radio" name="controls" />
+  
+  
+      <!-- arrows -->
+      <label for="slide1" class="left-arrow"> < </label>
+      <label for="slide2" class="left-arrow"> < </label>
+      <label for="slide3" class="left-arrow"> < </label>
+  
+      <label for="slide1" class="right-arrow"> > </label>
+      <label for="slide2" class="right-arrow"> > </label>
+      <label for="slide3" class="right-arrow"> > </label>
+  
+      <div class="carousel">
+        <ul>
+          <li>
+            <img src="{% static 'app/images/landing_1.png' %}" />
+          </li>
+          <li>
+            <img src="{% static 'app/images/landing_2.png' %}" alt="">
+          </li>
+          <li>
+            <img src="{% static 'app/images/landing_3.png' %}" />
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>  
+
+  <center>
+  <div class="cont">
+  <div class="container_p">
+    <div>
+      <h2>Grow</h2>
+      <p>Make a group with your buddies and grow</p>
+    </div>
+  </div>
+
+  <div class="container_p">
+    <div>
+      <h2>Learn</h2>
+      <p>Best platform to learn from others about their placement journey</p>
+    </div>
+  </div>
+
+  <div class="container_p">
+    <div>
+      <h2>Track</h2>
+      <p>Track others placement journey</p>
+    </div>
+  </div>
+</div>
+</center>
 {% endblock content%}
