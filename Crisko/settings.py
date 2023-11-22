@@ -85,10 +85,16 @@ WSGI_APPLICATION = 'Crisko.wsgi.application'
 # }
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL', 'postgres://test:pass1234@db:5432/criskodb')
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'criskodb',
+        'USER': 'test',
+        'PASSWORD': 'pass1234',
+        'HOST': 'db',
+        'PORT': '5432',
+    }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
