@@ -1,0 +1,15 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div id="content" class="site-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-7 mb-5">
+                <h2 class="section-title mb-2 text-black">Logout</h2>
+                <p class="lead">You have been successfully logged out.</p>
+                <p>Thank you for using our services. If you'd like to log in again, click <a href="{% url 'login' %}">here</a>.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

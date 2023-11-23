@@ -8,17 +8,17 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-7 mb-5">
-                <h2 class="section-title mb-2 text-black">Sign Up</h2>
-                <p class="lead">Create an account to get started.</p>
-                <form method="post" class="p-5 bg-white" action="{% url 'register' %}">
+                <h2 class="section-title mb-2 text-black">Login</h2>
+                <p class="lead">Log in to your account.</p>
+                <form method="post" class="p-5 bg-white" action="{% url 'login' %}">
                     {% csrf_token %}
                     {% bootstrap_form form %}
-                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                    <button type="submit" class="btn btn-primary">Login</button>
                 </form>
                 <div class="mt-3">
-                    <p>Already have an account? <a href="{% url 'login' %}">Login here</a>.</p>
+                    <p>Don't have an account? <a href="{% url 'register' %}">Sign up here</a>.</p>
                 </div>
-                <p>Or Sign Up With:</p>
+                <p>Or Log In With:</p>
                 <a href="{% provider_login_url 'google' %}" class="btn btn-danger">
                     <i class="fab fa-google"></i> Sign Up with Google
                 </a>

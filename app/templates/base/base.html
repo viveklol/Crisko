@@ -41,9 +41,14 @@
     padding-bottom: 50px; /* Adjust this value based on the height of your footer */
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 footer {
-    position: absolute;
-    margin-top: 10px;
+    margin-top: auto;
     width: 100%;
     height: 50px; /* Adjust this value based on the height of your footer */
     background-color: #f8f9fa;
@@ -74,15 +79,22 @@ footer {
     <div class="container">
         <div class="row align-items-center position-relative">
             <div class="site-logo">
-                <a href="index.html" class="text-black"><img src="{% static 'app/images/logo.png' %}" alt="Brand Logo" class="logo-image"></a>
+                <a href="{% url 'home' %}" class="text-black"><img src="{% static 'app/images/logo.png' %}" alt="Brand Logo" class="logo-image"></a>
             </div>
             <div class="col-12">
                 <nav class="site-navigation text-right ml-auto " role="navigation">
                     <ul class="site-menu main-menu js-clone-nav ml-auto d-none d-lg-block">
                         <li><a href="{% url 'home' %}" class="nav-link">Home</a></li>
                         <li><a href="#blog-section" class="nav-link">Blog</a></li>
-                        <li><a href="#contact-section" class="nav-link">Login</a></li>
-                        <li><a href="{% url 'register' %}" class="nav-link">SignUp</a></li>
+                        {% if user.is_authenticated %}
+                            <!-- If user is logged in, show different links -->
+                            <li><a href="{% url 'profile' %}" class="nav-link">Profile</a></li>
+                            <li><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
+                        {% else %}
+                            <!-- If user is not logged in, show login and signup links -->
+                            <li><a href="{% url 'login' %}" class="nav-link">Login</a></li>
+                            <li><a href="{% url 'register' %}" class="nav-link">SignUp</a></li>
+                        {% endif %}
                     </ul>
                 </nav>
             </div>
