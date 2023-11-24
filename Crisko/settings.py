@@ -141,20 +141,3 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'app/static')]
-
-AWS_ACCESS_KEY_ID = 'AKIAXON4QDBR44TJAHMZ'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'crisko'
-AWS_S3_ADDRESSING_STYLE = "virtual"
-AWS_S3_REGION_NAME = 'us-east-2'
-AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL =  None
-AWS_S3_VERITY = True
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-AWS_S3_CUSTOM_DOMAIN_STATIC = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN_STATIC, 'static/')
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
