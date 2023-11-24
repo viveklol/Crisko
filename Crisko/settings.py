@@ -36,6 +36,10 @@ INSTALLED_APPS = [
     'app.apps.AppConfig',
     'users.apps.UsersConfig',
     'bootstrap4',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,6 +50,21 @@ INSTALLED_APPS = [
     'corsheaders'
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': '350632543054-67uk6k3erghtn0gktnvpc5d64ocr3tc0.apps.googleusercontent.com',
+            'secret': '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',
+            'key': '',
+        },
+        'SCOPE': ['profile', 'email']
+    }
+}
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -54,7 +73,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+<<<<<<< HEAD
     'corsheaders.middleware.CorsMiddleware'
+=======
+    'allauth.account.middleware.AccountMiddleware',
+>>>>>>> main
 ]
 
 ROOT_URLCONF = 'Crisko.urls'
@@ -143,6 +166,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'app/static')]
 
+<<<<<<< HEAD
 
 # settings.py
 
@@ -150,3 +174,7 @@ CORS_ALLOWED_ORIGINS = [
     "chrome-extension://lmgmlgmlbmhmhlelganmopnhjfcabbfi",
     # Add other allowed origins as needed
 ]
+=======
+LOGIN_REDIRECT_URL = 'profile'
+LOGIN_URL = 'login'
+>>>>>>> main
