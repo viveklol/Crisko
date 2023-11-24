@@ -1,6 +1,9 @@
 import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+from django.contrib.auth import authenticate, login
+
 
 @csrf_exempt
 def parse_html(request):
@@ -22,3 +25,19 @@ def parse_html(request):
         return JsonResponse(response_data)
     else:
         return JsonResponse({'result': 'error', 'message': 'Invalid request method'})
+
+@csrf_exempt
+def extension_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return JsonResponse({'status': 'success'})
+        else:
+            return JsonResponse({'status': 'failure'})
+
+    return JsonResponse({'status': 'method_not_allowed'}, status=405)
