@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div id="content" class="site-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-7 mb-5">
+                <h2 class="section-title mb-2 text-black">User Profile</h2>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Profile Information</h5>
+                        <p class="card-text"><strong>Username:</strong> {{ user.username }}</p>
+                        <p class="card-text"><strong>Email:</strong> {{ user.email }}</p>
+                        <a href="#" class="btn btn-primary">Edit Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
