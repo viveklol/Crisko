@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 ]
 
 AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
@@ -60,7 +61,11 @@ SOCIALACCOUNT_PROVIDERS = {
             'secret': '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',
             'key': '',
         },
-        'SCOPE': ['profile', 'email']
+        'SCOPE': ['profile', 'email'],
+        'AUTH_PARAMS': {
+            'acess_type': 'online',
+            'prompt': 'consent',
+        }
     }
 }
 
@@ -163,3 +168,4 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'app/static')]
 
 LOGIN_REDIRECT_URL = 'profile'
 LOGIN_URL = 'login'
+SOCIALACCOUNT_AUTO_SIGNUP = True
