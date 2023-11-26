@@ -10,18 +10,26 @@
             <div class="col-md-7 mb-5">
                 <h2 class="section-title mb-2 text-black">Login</h2>
                 <p class="lead">Log in to your account.</p>
-                <form method="post" class="p-5 bg-white" action="{% url 'login' %}">
+
+                <!-- Login Form -->
+                <form method="post" class="p-2 bg-white mb-1" action="{% url 'login' %}">
                     {% csrf_token %}
                     {% bootstrap_form form %}
                     <button type="submit" class="btn btn-primary">Login</button>
                 </form>
+
+                <!-- OAuth (Google) Login Form -->
+                <form action="{% provider_login_url 'google' %}" method="post" class="p-2 bg-white">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fab fa-google"></i> Continue with Google
+                    </button>
+                </form>
+
+                <!-- Don't have an account? Sign up here -->
                 <div class="mt-3">
                     <p>Don't have an account? <a href="{% url 'register' %}">Sign up here</a>.</p>
                 </div>
-                <p>Or Log In With:</p>
-                <a href="{% provider_login_url 'google' %}" class="btn btn-danger">
-                    <i class="fab fa-google"></i> Sign Up with Google
-                </a>
             </div>
         </div>
     </div>
