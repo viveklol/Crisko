@@ -3,6 +3,8 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.contrib.auth import authenticate, login
+from django.contrib.sessions.models import Session
+from django.contrib.auth.models import User
 
 
 @csrf_exempt
@@ -28,16 +30,34 @@ def parse_html(request):
 
 @csrf_exempt
 def extension_login(request):
+    print(request)
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        data = json.loads(request.body)
+        session_key = data['sessionid']
 
-        user = authenticate(request, username=username, password=password)
+        # Retrieve the session object
+        session = Session.objects.filter(session_key=session_key)
 
-        if user is not None:
-            login(request, user)
-            return JsonResponse({'status': 'success'})
+        if not session.exists():
+            return JsonResponse({
+                'error': 'Authentication required in www.mywebsite.com',
+            }, status=401)
+
+        # Get the session data
+        session_data = session.first().get_decoded()
+
+        # Get the user ID from the session data
+        user_id = session_data.get('_auth_user_id')
+
+        if user_id:
+            # Retrieve the user object using the user ID
+            user = User.objects.get(pk=user_id)
+            username = user.username
+
+            return JsonResponse({
+                'message': f'You are logged in as {username} in www.mywebsite.com',
+            }, status=200)
         else:
-            return JsonResponse({'status': 'failure'})
-
-    return JsonResponse({'status': 'method_not_allowed'}, status=405)
+            return JsonResponse({
+                'error': 'User not authenticated',
+            }, status=401)
