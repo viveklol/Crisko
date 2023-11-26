@@ -23,4 +23,4 @@ EXPOSE 8000
 ENV DJANGO_SETTINGS_MODULE=Crisko.settings
 
 # Run migrations and start the Django development server
-CMD ["bash", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
+CMD ["bash", "-c", "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
