@@ -8,7 +8,9 @@ def register(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)
+            user.profile_picture = 'path/to/default_profile_picture.jpg'
+            user.save()
             email = form.cleaned_data.get('email')
             messages.success(request, f'Your account for {email} has been created! You can login now!')
             return redirect('login')

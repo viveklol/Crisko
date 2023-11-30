@@ -1,4 +1,5 @@
 {% extends 'base/base.html' %}
+{% load static %}
 
 {% block content %}
 <div id="content" class="site-section">
@@ -10,6 +11,13 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Profile Information</h5>
+
+                        {% if user.profile_picture %}
+                            <img src="{{ user.profile_picture.url }}" alt="Profile Picture">
+                        {% else %}
+                            <img src="{% static 'path/to/default_profile_picture.jpg' %}" alt="Default Profile Picture">
+                        {% endif %}
+
                         <p class="card-text"><strong>Username:</strong> {{ user.username }}</p>
                         <p class="card-text"><strong>Email:</strong> {{ user.email }}</p>
                         <a href="#" class="btn btn-primary">Edit Profile</a>
